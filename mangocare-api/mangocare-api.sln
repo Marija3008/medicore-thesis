@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mangocare-api", "mangocare-api.csproj", "{2212C5A0-1DCC-A3A9-8687-065919F605EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2212C5A0-1DCC-A3A9-8687-065919F605EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2212C5A0-1DCC-A3A9-8687-065919F605EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2212C5A0-1DCC-A3A9-8687-065919F605EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2212C5A0-1DCC-A3A9-8687-065919F605EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B861BDF2-3E98-4FCC-A237-95346CB90D4D}
+	EndGlobalSection
+EndGlobal

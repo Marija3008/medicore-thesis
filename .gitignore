@@ -1,0 +1,43 @@
+# React Native / Expo
+**/node_modules/
+**/.expo/
+**/.expo-shared/
+**/web-build/
+**/dist/
+
+# Secrets and environment files
+**/.env
+**/.env.*
+!**/.env.example
+*.pfx
+*.pem
+*.key
+
+# .NET / Visual Studio generated files
+**/bin/
+**/obj/
+**/.vs/
+**/TestResults/
+*.user
+*.suo
+
+# Local runtime data
+**/Uploads/
+**/appsettings.Development.json
+**/appsettings.Production.json
+**/appsettings.Local.json
+
+# Local database files
+*.mdf
+*.ldf
+*.db
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# VS Code local settings
+**/.vscode/
+
+# Old local test project
+ConsoleApp1/
