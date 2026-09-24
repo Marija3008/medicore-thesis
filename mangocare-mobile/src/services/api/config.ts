@@ -1,45 +1,11 @@
-//export const API_BASE_URL = "http://localhost:5108/api";
+//IMPORTANT: Change the IP address to your laptop's IP address when testing on a physical device, by checking it with the command "ipconfig" in the terminal. The IP address should be in the format "192.168.x.x" or "10.x.x.x". (IPv4 Address..........)
 
-//on Iphone
-// export const API_BASE_URL = "http://192.168.1.100:5108/api";
+// Local fallback API URL.
+// For physical-device development, EXPO_PUBLIC_API_URL can be set in .env
+// to an HTTPS development tunnel or, later, the deployed API URL.
 
-import Constants from "expo-constants";
-import { Platform } from "react-native";
+const LOCAL_API_URL = "http://192.168.1.100:5108/api";
 
-const API_PORT = "5108";
-const API_PATH = "/api";
+export const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || LOCAL_API_URL;
 
-function getExpoHostIp() {
-  const hostUri = 
-    Constants.expoConfig?.hostUri ??
-    (Constants as any).manifest?.debuggerHost ??
-    (Constants as any).manifest2?.extra?.expoClient?.hostUri;
-
-    if (!hostUri) {
-      return null;
-    }
-
-    return hostUri.split(":")[0];
-}
-
-function getLocalApiBaseUrl() {
-  if (Platform.OS === "web") {
-    return `http://localhost:${API_PORT}${API_PATH}`;
-  } 
-
-  const expoHostIp = getExpoHostIp();
-
-  if (!expoHostIp) {
-    return `http://localhost:${API_PORT}${API_PATH}`;
-  }
-
-  return `http://${expoHostIp}:${API_PORT}${API_PATH}`;
-}
-
-export const API_BASE_URL =
-  process.env.EXPO_PUBLIC_API_URL ?? getLocalApiBaseUrl();
-
-
-
-  //Expo Web on laptop → http://localhost:5108/api
-//Expo Go on phone   → automatically uses laptop IP from Expo
+//run the app with: npx expo start --tunnel --clear
