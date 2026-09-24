@@ -107,7 +107,7 @@ export function SideMenu({ visible, onClose }: SideMenuProps) {
             </View>
 
             <View style={styles.headerText}>
-              <Text style={styles.appName}>MangoCare</Text>
+              <Text style={styles.appName}>MediCore</Text>
               <Text style={styles.appSubtitle}>Patient Portal</Text>
             </View>
 

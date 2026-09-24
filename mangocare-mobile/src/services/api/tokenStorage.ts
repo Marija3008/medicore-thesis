@@ -1,7 +1,7 @@
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
 
-const ACCESS_TOKEN_KEY = "mangocare_access_token";
+const ACCESS_TOKEN_KEY = "medicore_access_token";
 
 export async function saveAccessToken(token: string): Promise<void> {
   if (Platform.OS === "web") {

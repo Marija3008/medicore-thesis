@@ -73,7 +73,7 @@ export default function AiChatScreen() {
     <Screen scroll={false}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.eyebrow}>MangoCare AI</Text>
+          <Text style={styles.eyebrow}>MediCore AI</Text>
           <Text style={styles.title}>Health Assistant</Text>
           <Text style={styles.subtitle}>
             Ask questions, prepare for consultations, or understand health data.
@@ -108,7 +108,7 @@ export default function AiChatScreen() {
         {error && <Text style={styles.inlineError}>{error}</Text>}
 
         {sending && (
-          <Text style={styles.sendingText}>MangoCare AI is typing...</Text>
+          <Text style={styles.sendingText}>MediCore AI is typing...</Text>
         )}
 
         <View style={styles.inputWrapper}>

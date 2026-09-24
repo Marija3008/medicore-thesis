@@ -35,7 +35,7 @@ export const caseMessagesMock: Record<string, CaseMessage[]> = {
       id: "message-1",
       caseId: "case-1",
       sender: "system",
-      senderName: "MangoCare",
+      senderName: "MediCore",
       content:
         "Your case has been created. A healthcare professional will review it.",
       createdAt: "2026-06-15T09:30:00.000Z",
@@ -64,7 +64,7 @@ export const caseMessagesMock: Record<string, CaseMessage[]> = {
       id: "message-4",
       caseId: "case-2",
       sender: "system",
-      senderName: "MangoCare",
+      senderName: "MediCore",
       content:
         "Your video consultation request has been created.",
       createdAt: "2026-06-10T14:00:00.000Z",

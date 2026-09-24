@@ -52,7 +52,7 @@ export async function apiFetch<T>(
     });
   } catch {
     throw new ApiError(
-      "Could not connect to the MangoCare API. Check that the backend is running and the phone is on the same network.",
+      "Could not connect to the MediCore API. Check that the backend is running and the phone is on the same network.",
       0,
       null
     );

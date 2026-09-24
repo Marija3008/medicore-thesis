@@ -15,7 +15,7 @@ export const patientProfileMock: PatientProfile = {
   phone: "+389 70 123 456",
   address: "Ohrid, North Macedonia",
 
-  insuranceProvider: "MangoCare Health Plan",
+  insuranceProvider: "MediCore Health Plan",
   insuranceNumber: "MC-2048-9931",
 
   emergencyContactName: "Jamie Morgan",

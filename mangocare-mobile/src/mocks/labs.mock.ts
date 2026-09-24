@@ -4,7 +4,7 @@ export const labReportsMock: LabReport[] = [
   {
     id: "lab-1",
     title: "Blood Analysis",
-    labName: "MangoCare Diagnostics",
+    labName: "MediCore Diagnostics",
     collectedAt: "2026-06-14",
     reviewedBy: "Dr. Emma Wilson",
     wellnessScore: 82,

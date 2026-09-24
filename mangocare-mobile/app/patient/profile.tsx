@@ -179,7 +179,7 @@ export default function ProfileScreen() {
             <SettingsRow
               icon="help-circle-outline"
               title="Help & Support"
-              subtitle="Contact MangoCare support"
+              subtitle="Contact MediCore support"
               onPress={() => {}}
             />
           </Card>

@@ -113,7 +113,7 @@ export default function RegisterScreen() {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.card}>
-          <Text style={styles.appName}>MangoCare</Text>
+          <Text style={styles.appName}>MediCore</Text>
 
           <Text style={styles.title}>Create your account</Text>
 

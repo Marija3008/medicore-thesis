@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "mangocare-mobile",
-    "slug": "mangocare-mobile",
+    "name": "MediCore",
+    "slug": "medicore-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "mangocaremobile",
+    "scheme": "medicore",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true

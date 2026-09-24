@@ -5,7 +5,7 @@ export const aiChatInitialMessagesMock: AiChatMessage[] = [
     id: "system-1",
     role: "assistant",
     content:
-      "Hi Alex, I’m your MangoCare AI assistant. I can help you understand symptoms, prepare questions for your doctor, and explain lab results in simple language.",
+      "Hi Alex, I’m your MediCore AI assistant. I can help you understand symptoms, prepare questions for your doctor, and explain lab results in simple language.",
     createdAt: "2026-06-16T09:00:00.000Z",
   },
 ];

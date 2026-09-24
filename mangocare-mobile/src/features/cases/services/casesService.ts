@@ -64,7 +64,7 @@ export const casesService = {
       id: createId(),
       caseId,
       sender: "system",
-      senderName: "MangoCare",
+      senderName: "MediCore",
       content:
         "Your case has been created. A healthcare professional will review it.",
       createdAt: now,
