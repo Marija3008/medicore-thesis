@@ -88,6 +88,108 @@ namespace MediCore.Api.Controllers
             return Ok(documents);
         }
 
+        // GET: /api/documents/patient/{patientUserId}/{documentId}
+        // Returns one specific patient document only when the logged-in doctor
+        // has an active relationship with that patient.
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("patient/{patientUserId}/{documentId:int}")]
+        public async Task<ActionResult<MedicalDocument>> GetPatientDocument(
+            string patientUserId,
+            int documentId)
+        {
+            var doctorUserId = GetCurrentUserId();
+
+            if (string.IsNullOrWhiteSpace(doctorUserId))
+            {
+                return Unauthorized();
+            }
+
+            var canAccess = await _patientAccessService
+                .CanDoctorAccessPatientAsync(
+                    doctorUserId,
+                    patientUserId);
+
+            if (!canAccess)
+            {
+                return Forbid();
+            }
+
+            var document = await _db.MedicalDocuments
+                .AsNoTracking()
+                .SingleOrDefaultAsync(document =>
+                    document.Id == documentId &&
+                    document.OwnerUserId == patientUserId &&
+                    !document.IsDeleted);
+
+            if (document is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(document);
+        }
+
+        // GET: /api/documents/patient/{patientUserId}/{documentId}/file
+        // Allows an authorized doctor to view/download a patient's document file.
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("patient/{patientUserId}/{documentId:int}/file")]
+        public async Task<IActionResult> GetPatientDocumentFile(
+            string patientUserId,
+            int documentId)
+        {
+            var doctorUserId = GetCurrentUserId();
+
+            if (string.IsNullOrWhiteSpace(doctorUserId))
+            {
+                return Unauthorized();
+            }
+
+            var canAccess = await _patientAccessService
+                .CanDoctorAccessPatientAsync(
+                    doctorUserId,
+                    patientUserId);
+
+            if (!canAccess)
+            {
+                return Forbid();
+            }
+
+            var document = await _db.MedicalDocuments
+                .AsNoTracking()
+                .FirstOrDefaultAsync(document =>
+                    document.Id == documentId &&
+                    document.OwnerUserId == patientUserId &&
+                    !document.IsDeleted
+                );
+
+            if (document is null)
+            {
+                return NotFound("Document not found.");
+            }
+
+            var filePath = Path.Combine(
+                _environment.ContentRootPath,
+                "Uploads",
+                document.StoredFileName
+            );
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound(
+                    "The document file no longer exists on the server."
+                );
+            }
+
+            Response.Headers["Content-Disposition"] =
+                $"inline; filename=\"{document.OriginalFileName}\"";
+
+            return PhysicalFile(
+                filePath,
+                document.ContentType,
+                enableRangeProcessing: true
+            );
+        }
+
         // GET: /api/documents/trash
         // Returns only the logged-in patient's trashed documents.
         [Authorize(Roles = "Patient")]
