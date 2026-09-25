@@ -1,18 +1,18 @@
-﻿using mangocare_api.Contracts;
-using mangocare_api.Data;
+﻿using MediCore.Api.Contracts;
+using MediCore.Api.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace mangocare_api.Controllers
+namespace MediCore.Api.Controllers
 {
     [ApiController]
     [Route("api/doctors")]
     public class DoctorsController : ControllerBase
     {
-        private readonly MangoCareDbContext _db;
+        private readonly MediCoreDbContext _db;
 
-        public DoctorsController(MangoCareDbContext db)
+        public DoctorsController(MediCoreDbContext db)
         {
             _db = db;
         }

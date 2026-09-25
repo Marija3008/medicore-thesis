@@ -1,6 +1,6 @@
-@mangocare_api_HostAddress = http://localhost:5108
+@MediCore.Api_HostAddress = http://localhost:5108
 
-GET {{mangocare_api_HostAddress}}/weatherforecast/
+GET {{MediCore.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

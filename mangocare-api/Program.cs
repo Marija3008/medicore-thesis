@@ -1,8 +1,8 @@
 using System.Text;
 using Microsoft.OpenApi;
-using mangocare_api.Data;
-using mangocare_api.Models;
-using mangocare_api.Services;
+using MediCore.Api.Data;
+using MediCore.Api.Models;
+using MediCore.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -54,7 +54,7 @@ builder.Services.AddSwaggerGen(options =>
     );
 });
 
-builder.Services.AddDbContext<MangoCareDbContext>(options =>
+builder.Services.AddDbContext<MediCoreDbContext>(options =>
 {
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
@@ -73,7 +73,7 @@ builder.Services
         options.Password.RequireNonAlphanumeric = false;
     })
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<MangoCareDbContext>();
+    .AddEntityFrameworkStores<MediCoreDbContext>();
 
 builder.Services
     .AddAuthentication(options =>

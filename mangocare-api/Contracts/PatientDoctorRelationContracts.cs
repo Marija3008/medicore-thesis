@@ -1,4 +1,4 @@
-﻿namespace mangocare_api.Contracts
+﻿namespace MediCore.Api.Contracts
 {
     public class DoctorDirectoryItemResponse
     {

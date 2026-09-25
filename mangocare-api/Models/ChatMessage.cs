@@ -1,4 +1,4 @@
-﻿namespace mangocare_api.Models
+﻿namespace MediCore.Api.Models
 {
     public class ChatMessage
     {

@@ -1,13 +1,13 @@
 ﻿using System.Security.Claims;
-using mangocare_api.Data;
-using mangocare_api.Contracts;
-using mangocare_api.Models;
-using mangocare_api.Services;
+using MediCore.Api.Data;
+using MediCore.Api.Contracts;
+using MediCore.Api.Models;
+using MediCore.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace mangocare_api.Controllers
+namespace MediCore.Api.Controllers
 {
     [ApiController]
     [Route("api/auth")]
@@ -15,12 +15,12 @@ namespace mangocare_api.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly JwtTokenService _jwtTokenService;
-        private readonly MangoCareDbContext _db;
+        private readonly MediCoreDbContext _db;
 
         public AuthController(
             UserManager<ApplicationUser> userManager,
             JwtTokenService jwtTokenService,
-            MangoCareDbContext db)
+            MediCoreDbContext db)
         {
             _userManager = userManager;
             _jwtTokenService = jwtTokenService;

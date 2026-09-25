@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using mangocare_api.Data;
+using MediCore.Api.Data;
 
 #nullable disable
 
-namespace mangocare_api.Migrations
+namespace MediCore.Api.Migrations
 {
-    [DbContext(typeof(MangoCareDbContext))]
+    [DbContext(typeof(MediCoreDbContext))]
     [Migration("20260622120300_AddChatTables")]
     partial class AddChatTables
     {
@@ -25,7 +25,7 @@ namespace mangocare_api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("mangocare_api.Models.Chat", b =>
+            modelBuilder.Entity("MediCore.Api.Models.Chat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace mangocare_api.Migrations
                     b.ToTable("Chats");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.ChatMessage", b =>
+            modelBuilder.Entity("MediCore.Api.Models.ChatMessage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,7 +77,7 @@ namespace mangocare_api.Migrations
                     b.ToTable("ChatMessages");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.MedicalDocument", b =>
+            modelBuilder.Entity("MediCore.Api.Models.MedicalDocument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -130,9 +130,9 @@ namespace mangocare_api.Migrations
                     b.ToTable("MedicalDocuments");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.ChatMessage", b =>
+            modelBuilder.Entity("MediCore.Api.Models.ChatMessage", b =>
                 {
-                    b.HasOne("mangocare_api.Models.Chat", "Chat")
+                    b.HasOne("MediCore.Api.Models.Chat", "Chat")
                         .WithMany("Messages")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -141,7 +141,7 @@ namespace mangocare_api.Migrations
                     b.Navigation("Chat");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.Chat", b =>
+            modelBuilder.Entity("MediCore.Api.Models.Chat", b =>
                 {
                     b.Navigation("Messages");
                 });

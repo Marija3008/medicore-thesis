@@ -1,25 +1,25 @@
 ﻿using System.Security.Claims;
-using mangocare_api.Contracts;
-using mangocare_api.Data;
-using mangocare_api.Models;
-using mangocare_api.Services;
+using MediCore.Api.Contracts;
+using MediCore.Api.Data;
+using MediCore.Api.Models;
+using MediCore.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace mangocare_api.Controllers
+namespace MediCore.Api.Controllers
 {
     [ApiController]
     [Route("api/chats")]
     [Authorize]
     public class ChatsController : ControllerBase
     {
-        private readonly MangoCareDbContext _db;
+        private readonly MediCoreDbContext _db;
         private readonly OpenAiChatService _openAiChatService;
         private readonly ILogger<ChatsController> _logger;
 
         public ChatsController(
-            MangoCareDbContext db,
+            MediCoreDbContext db,
             OpenAiChatService openAiChatService,
             ILogger<ChatsController> logger)
         {

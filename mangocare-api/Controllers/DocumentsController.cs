@@ -1,22 +1,22 @@
 ﻿using System.Security.Claims;
-using mangocare_api.Data;
-using mangocare_api.Models;
+using MediCore.Api.Data;
+using MediCore.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace mangocare_api.Controllers
+namespace MediCore.Api.Controllers
 {
     [ApiController]
     [Route("api/documents")]
     [Authorize(Roles = "Patient")]
     public class DocumentsController : ControllerBase
     {
-        private readonly MangoCareDbContext _db;
+        private readonly MediCoreDbContext _db;
         private readonly IWebHostEnvironment _environment;
 
         public DocumentsController(
-            MangoCareDbContext db,
+            MediCoreDbContext db,
             IWebHostEnvironment environment)
         {
             _db = db;

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace mangocare_api.Migrations
+namespace MediCore.Api.Migrations
 {
     /// <inheritdoc />
     public partial class AddChatTables : Migration

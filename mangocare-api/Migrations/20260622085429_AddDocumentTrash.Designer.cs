@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using mangocare_api.Data;
+using MediCore.Api.Data;
 
 #nullable disable
 
-namespace mangocare_api.Migrations
+namespace MediCore.Api.Migrations
 {
-    [DbContext(typeof(MangoCareDbContext))]
+    [DbContext(typeof(MediCoreDbContext))]
     [Migration("20260622085429_AddDocumentTrash")]
     partial class AddDocumentTrash
     {
@@ -25,7 +25,7 @@ namespace mangocare_api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("mangocare_api.Models.MedicalDocument", b =>
+            modelBuilder.Entity("MediCore.Api.Models.MedicalDocument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using mangocare_api.Data;
+using MediCore.Api.Data;
 
 #nullable disable
 
-namespace mangocare_api.Migrations
+namespace MediCore.Api.Migrations
 {
-    [DbContext(typeof(MangoCareDbContext))]
+    [DbContext(typeof(MediCoreDbContext))]
     [Migration("20260624090621_MakeDocumentAndChatOwnershipRequired")]
     partial class MakeDocumentAndChatOwnershipRequired
     {
@@ -158,7 +158,7 @@ namespace mangocare_api.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.ApplicationUser", b =>
+            modelBuilder.Entity("MediCore.Api.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -230,7 +230,7 @@ namespace mangocare_api.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.Chat", b =>
+            modelBuilder.Entity("MediCore.Api.Models.Chat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,7 +259,7 @@ namespace mangocare_api.Migrations
                     b.ToTable("Chats");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.ChatMessage", b =>
+            modelBuilder.Entity("MediCore.Api.Models.ChatMessage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -288,7 +288,7 @@ namespace mangocare_api.Migrations
                     b.ToTable("ChatMessages");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.DoctorProfile", b =>
+            modelBuilder.Entity("MediCore.Api.Models.DoctorProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -317,7 +317,7 @@ namespace mangocare_api.Migrations
                     b.ToTable("DoctorProfiles");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.MedicalDocument", b =>
+            modelBuilder.Entity("MediCore.Api.Models.MedicalDocument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -376,7 +376,7 @@ namespace mangocare_api.Migrations
                     b.ToTable("MedicalDocuments");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.PatientDoctorRelation", b =>
+            modelBuilder.Entity("MediCore.Api.Models.PatientDoctorRelation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -415,7 +415,7 @@ namespace mangocare_api.Migrations
                     b.ToTable("PatientDoctorRelations");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.PatientProfile", b =>
+            modelBuilder.Entity("MediCore.Api.Models.PatientProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -449,7 +449,7 @@ namespace mangocare_api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("mangocare_api.Models.ApplicationUser", null)
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -458,7 +458,7 @@ namespace mangocare_api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("mangocare_api.Models.ApplicationUser", null)
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -473,7 +473,7 @@ namespace mangocare_api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mangocare_api.Models.ApplicationUser", null)
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -482,16 +482,16 @@ namespace mangocare_api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("mangocare_api.Models.ApplicationUser", null)
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.Chat", b =>
+            modelBuilder.Entity("MediCore.Api.Models.Chat", b =>
                 {
-                    b.HasOne("mangocare_api.Models.ApplicationUser", "OwnerUser")
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", "OwnerUser")
                         .WithMany()
                         .HasForeignKey("OwnerUserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -500,9 +500,9 @@ namespace mangocare_api.Migrations
                     b.Navigation("OwnerUser");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.ChatMessage", b =>
+            modelBuilder.Entity("MediCore.Api.Models.ChatMessage", b =>
                 {
-                    b.HasOne("mangocare_api.Models.Chat", "Chat")
+                    b.HasOne("MediCore.Api.Models.Chat", "Chat")
                         .WithMany("Messages")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -511,20 +511,20 @@ namespace mangocare_api.Migrations
                     b.Navigation("Chat");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.DoctorProfile", b =>
+            modelBuilder.Entity("MediCore.Api.Models.DoctorProfile", b =>
                 {
-                    b.HasOne("mangocare_api.Models.ApplicationUser", "User")
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", "User")
                         .WithOne()
-                        .HasForeignKey("mangocare_api.Models.DoctorProfile", "UserId")
+                        .HasForeignKey("MediCore.Api.Models.DoctorProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.MedicalDocument", b =>
+            modelBuilder.Entity("MediCore.Api.Models.MedicalDocument", b =>
                 {
-                    b.HasOne("mangocare_api.Models.ApplicationUser", "OwnerUser")
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", "OwnerUser")
                         .WithMany()
                         .HasForeignKey("OwnerUserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -533,15 +533,15 @@ namespace mangocare_api.Migrations
                     b.Navigation("OwnerUser");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.PatientDoctorRelation", b =>
+            modelBuilder.Entity("MediCore.Api.Models.PatientDoctorRelation", b =>
                 {
-                    b.HasOne("mangocare_api.Models.ApplicationUser", "Doctor")
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", "Doctor")
                         .WithMany()
                         .HasForeignKey("DoctorUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("mangocare_api.Models.ApplicationUser", "Patient")
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientUserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -552,18 +552,18 @@ namespace mangocare_api.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.PatientProfile", b =>
+            modelBuilder.Entity("MediCore.Api.Models.PatientProfile", b =>
                 {
-                    b.HasOne("mangocare_api.Models.ApplicationUser", "User")
+                    b.HasOne("MediCore.Api.Models.ApplicationUser", "User")
                         .WithOne()
-                        .HasForeignKey("mangocare_api.Models.PatientProfile", "UserId")
+                        .HasForeignKey("MediCore.Api.Models.PatientProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("mangocare_api.Models.Chat", b =>
+            modelBuilder.Entity("MediCore.Api.Models.Chat", b =>
                 {
                     b.Navigation("Messages");
                 });

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace mangocare_api.Models
+namespace MediCore.Api.Models
 {
     public class ApplicationUser : IdentityUser
     {

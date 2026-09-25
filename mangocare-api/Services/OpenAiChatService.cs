@@ -1,7 +1,7 @@
 ﻿using OpenAI.Chat;
-using DatabaseChatMessage = mangocare_api.Models.ChatMessage;
+using DatabaseChatMessage = MediCore.Api.Models.ChatMessage;
 
-namespace mangocare_api.Services
+namespace MediCore.Api.Services
 {
     public class OpenAiChatService
     {
@@ -40,7 +40,7 @@ namespace mangocare_api.Services
                 });
 
             var prompt = $"""
-You are MangoCare, a supportive health-information assistant.
+You are MediCore, a supportive health-information assistant.
 
 Rules:
 - Explain health topics in plain, calm, simple language.

@@ -8,4 +8,5 @@ const LOCAL_API_URL = "http://192.168.1.100:5108/api";
 
 export const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || LOCAL_API_URL;
 
+
 //run the app with: npx expo start --tunnel --clear

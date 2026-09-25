@@ -1,13 +1,13 @@
 ﻿using System.Security.Claims;
-using mangocare_api.Contracts;
-using mangocare_api.Data;
-using mangocare_api.Models;
+using MediCore.Api.Contracts;
+using MediCore.Api.Data;
+using MediCore.Api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OpenAI.Realtime;
 
-namespace mangocare_api.Controllers
+namespace MediCore.Api.Controllers
 {
     [ApiController]
     [Route("api/patient-doctor-relations")]
@@ -18,9 +18,9 @@ namespace mangocare_api.Controllers
         private const string RejectedStatus = "Rejected";
         private const string EndedStatus = "Ended";
 
-        private readonly MangoCareDbContext _db;
+        private readonly MediCoreDbContext _db;
 
-        public PatientDoctorRelationsController(MangoCareDbContext db)
+        public PatientDoctorRelationsController(MediCoreDbContext db)
         {
             _db = db;
         }

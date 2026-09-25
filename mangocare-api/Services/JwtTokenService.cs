@@ -1,12 +1,12 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using mangocare_api.Contracts;
-using mangocare_api.Models;
+using MediCore.Api.Contracts;
+using MediCore.Api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
-namespace mangocare_api.Services
+namespace MediCore.Api.Services
 {
     public class JwtTokenService
     {

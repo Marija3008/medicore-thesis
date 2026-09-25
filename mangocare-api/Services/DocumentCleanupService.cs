@@ -1,7 +1,7 @@
-﻿using mangocare_api.Data;
+﻿using MediCore.Api.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace mangocare_api.Services
+namespace MediCore.Api.Services
 {
     public class DocumentCleanupService : BackgroundService
     {
@@ -42,7 +42,7 @@ namespace mangocare_api.Services
                 using var scope = _scopeFactory.CreateScope();
 
                 var db = scope.ServiceProvider
-                    .GetRequiredService<MangoCareDbContext>();
+                    .GetRequiredService<MediCoreDbContext>();
 
                 var thirtyDaysAgo = DateTime.UtcNow.AddDays(-30);
 

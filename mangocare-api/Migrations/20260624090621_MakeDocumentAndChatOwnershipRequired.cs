@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace mangocare_api.Migrations
+namespace MediCore.Api.Migrations
 {
     /// <inheritdoc />
     public partial class MakeDocumentAndChatOwnershipRequired : Migration

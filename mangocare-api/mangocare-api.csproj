@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>mangocare_api</RootNamespace>
+    <RootNamespace>MediCore.Api</RootNamespace>
     <UserSecretsId>733b19cb-02b0-48ce-b1f3-f86e43d40d6d</UserSecretsId>
   </PropertyGroup>
 

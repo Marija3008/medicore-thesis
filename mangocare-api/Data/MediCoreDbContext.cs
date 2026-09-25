@@ -1,15 +1,15 @@
 ﻿//this file the Context is used by tthe API controllers to read, add, update, and delete database data
 
-using mangocare_api.Models;
+using MediCore.Api.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace mangocare_api.Data
+namespace MediCore.Api.Data
 {
-    public class MangoCareDbContext : IdentityDbContext<ApplicationUser>
+    public class MediCoreDbContext : IdentityDbContext<ApplicationUser>
     {
-        public MangoCareDbContext(
-            DbContextOptions<MangoCareDbContext> options
+        public MediCoreDbContext(
+            DbContextOptions<MediCoreDbContext> options
         ) : base(options)
         {
         }
