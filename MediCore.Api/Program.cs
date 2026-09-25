@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MediCore.Api.Services.Interfaces;
+using MediCore.Api.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -123,6 +125,8 @@ builder.Services.AddHostedService<DocumentCleanupService>();
 builder.Services.AddSingleton<OpenAiChatService>();
 
 builder.Services.AddScoped<JwtTokenService>();
+
+builder.Services.AddScoped<IPatientAccessService, PatientAccessService>();
 
 var app = builder.Build();
 

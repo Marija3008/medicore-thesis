@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using MediCore.Api.Data;
 using MediCore.Api.Models;
+using MediCore.Api.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,22 +10,26 @@ namespace MediCore.Api.Controllers
 {
     [ApiController]
     [Route("api/documents")]
-    [Authorize(Roles = "Patient")]
+    [Authorize]
     public class DocumentsController : ControllerBase
     {
         private readonly MediCoreDbContext _db;
         private readonly IWebHostEnvironment _environment;
+        private readonly IPatientAccessService _patientAccessService;
 
         public DocumentsController(
-            MediCoreDbContext db,
-            IWebHostEnvironment environment)
+     MediCoreDbContext db,
+     IWebHostEnvironment environment,
+     IPatientAccessService patientAccessService)
         {
             _db = db;
             _environment = environment;
+            _patientAccessService = patientAccessService;
         }
 
         // GET: /api/documents
         // Returns only the logged-in patient's normal documents.
+        [Authorize(Roles = "Patient")]
         [HttpGet]
         public async Task<ActionResult<List<MedicalDocument>>> GetDocuments()
         {
@@ -47,8 +52,45 @@ namespace MediCore.Api.Controllers
             return Ok(documents);
         }
 
+        // GET: /api/documents/patient/{patientUserId}
+        // Returns a patient's active documents only when the logged-in doctor
+        // has an active relationship with that patient.
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("patient/{patientUserId}")]
+        public async Task<ActionResult<List<MedicalDocument>>> GetPatientDocuments(
+            string patientUserId)
+        {
+            var doctorUserId = GetCurrentUserId();
+
+            if (string.IsNullOrWhiteSpace(doctorUserId))
+            {
+                return Unauthorized();
+            }
+
+            var canAccess = await _patientAccessService
+                .CanDoctorAccessPatientAsync(
+                    doctorUserId,
+                    patientUserId);
+
+            if (!canAccess)
+            {
+                return Forbid();
+            }
+
+            var documents = await _db.MedicalDocuments
+                .AsNoTracking()
+                .Where(document =>
+                    document.OwnerUserId == patientUserId &&
+                    !document.IsDeleted)
+                .OrderByDescending(document => document.UploadedAt)
+                .ToListAsync();
+
+            return Ok(documents);
+        }
+
         // GET: /api/documents/trash
         // Returns only the logged-in patient's trashed documents.
+        [Authorize(Roles = "Patient")]
         [HttpGet("trash")]
         public async Task<ActionResult<List<MedicalDocument>>> GetTrashDocuments()
         {
@@ -72,6 +114,7 @@ namespace MediCore.Api.Controllers
         }
 
         // GET: /api/documents/1
+        [Authorize(Roles = "Patient")]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<MedicalDocument>> GetDocument(int id)
         {
@@ -100,6 +143,7 @@ namespace MediCore.Api.Controllers
 
         // GET: /api/documents/1/file
         // Returns the actual PDF/image only to its owner.
+        [Authorize(Roles = "Patient")]
         [HttpGet("{id:int}/file")]
         public async Task<IActionResult> GetDocumentFile(int id)
         {
@@ -147,6 +191,7 @@ namespace MediCore.Api.Controllers
         }
 
         // POST: /api/documents/upload
+        [Authorize(Roles = "Patient")]
         [HttpPost("upload")]
         public async Task<ActionResult<MedicalDocument>> UploadDocument(
             IFormFile file,
@@ -217,6 +262,7 @@ namespace MediCore.Api.Controllers
 
         // DELETE: /api/documents/1
         // Soft delete: moves only the owner's document to Trash.
+        [Authorize(Roles = "Patient")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> MoveToTrash(int id)
         {
@@ -250,6 +296,7 @@ namespace MediCore.Api.Controllers
         }
 
         // POST: /api/documents/1/restore
+        [Authorize(Roles = "Patient")]
         [HttpPost("{id:int}/restore")]
         public async Task<ActionResult<MedicalDocument>> RestoreDocument(int id)
         {
@@ -282,6 +329,7 @@ namespace MediCore.Api.Controllers
 
         // DELETE: /api/documents/1/permanent
         // Removes only the owner's database row and stored file.
+        [Authorize(Roles = "Patient")]
         [HttpDelete("{id:int}/permanent")]
         public async Task<IActionResult> PermanentlyDeleteDocument(int id)
         {
