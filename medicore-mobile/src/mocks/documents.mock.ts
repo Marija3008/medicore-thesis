@@ -8,7 +8,7 @@ export const medicalDocumentsMock: MedicalDocument[] = [
     type: "lab_report",
     status: "reviewed",
     uploadedAt: "2026-06-14T08:30:00.000Z",
-    uploadedBy: "MangoCare Lab",
+    uploadedBy: "MediCore Lab",
     sizeLabel: "1.8 MB",
     summary:
       "Blood analysis report with Vitamin D and iron markers requiring attention.",
