@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(25, 28, 32, 0.35)",
   },
   backdrop: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
   },
   menu: {
     width: "82%",

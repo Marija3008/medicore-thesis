@@ -23,6 +23,13 @@ namespace MediCore.Api.Services.Interfaces
         Task<Medication?> DeactivateMedicationAsync(
     string patientUserId,
     int medicationId);
+
+        Task<Medication?> ReactivateMedicationAsync(
+    int medicationId,
+    string patientUserId
+);
     }
+
+
 
 }

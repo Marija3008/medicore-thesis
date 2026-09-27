@@ -1,29 +1,53 @@
-export type MedicationFrequency =
-  | "once_daily"
-  | "twice_daily"
-  | "three_times_daily"
-  | "weekly"
-  | "as_needed";
-
-export type MedicationStatus = "active" | "paused" | "completed";
-
-export interface MedicationDose {
-  id: string;
-  time: string;
-  taken: boolean;
+export interface MedicationSchedule {
+  id: number;
+  timeOfDay: string;
+  reminderEnabled: boolean;
 }
 
 export interface Medication {
-  id: string;
+  id: number;
   name: string;
-  dosage: string;
-  instructions: string;
-  prescribedBy: string;
-  frequency: MedicationFrequency;
-  status: MedicationStatus;
+  dose: string;
+  unit?: string | null;
+  instructions?: string | null;
+
   startDate: string;
-  endDate?: string;
-  reminderEnabled: boolean;
-  dosesToday: MedicationDose[];
-  notes?: string;
+  endDate?: string | null;
+
+  isActive: boolean;
+  createdAt: string;
+
+  schedules: MedicationSchedule[];
+}
+
+export interface CreateMedicationRequest {
+  name: string;
+  dose: string;
+  unit?: string | null;
+  instructions?: string | null;
+
+  startDate: string;
+  endDate?: string | null;
+
+  schedules: {
+    timeOfDay: string;
+    reminderEnabled: boolean;
+  }[];
+}
+
+export interface UpdateMedicationRequest {
+  name: string;
+  dose: string;
+  unit?: string | null;
+  instructions?: string | null;
+
+  startDate: string;
+  endDate?: string | null;
+
+  isActive: boolean;
+
+  schedules: {
+    timeOfDay: string;
+    reminderEnabled: boolean;
+  }[];
 }

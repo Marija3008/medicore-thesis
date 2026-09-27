@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { medicationsService } from "@/features/medications/services/medicationsService";
 
-export function useMedicationDetails(medicationId?: string) {
+export function useMedicationDetails(medicationId?: number) {
   return useQuery({
     queryKey: ["medication", medicationId],
     queryFn: () => medicationsService.getMedicationById(medicationId!),

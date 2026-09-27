@@ -1,8 +1,9 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
 import { MedicationCard } from "@/features/medications/components/MedicationCard";
 import { useMedications } from "@/features/medications/hooks/useMedications";
+import { AppButton } from "@/shared/components/AppButton";
 import { EmptyState } from "@/shared/components/EmptyState";
 import { ErrorState } from "@/shared/components/ErrorState";
 import { LoadingState } from "@/shared/components/LoadingState";
@@ -54,9 +55,16 @@ export default function MedicationsScreen() {
           </Text>
         </View>
 
+        <View style={styles.addButton}>
+          <AppButton
+            title="Add Medication"
+            onPress={() => router.push("/patient/medications/add")}
+          />
+        </View>
+
         <FlatList
           data={data}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <MedicationCard
               medication={item}
@@ -64,7 +72,7 @@ export default function MedicationsScreen() {
                 router.push({
                   pathname: "/patient/medications/[medicationId]",
                   params: {
-                    medicationId: item.id,
+                    medicationId: item.id.toString(),
                   },
                 })
               }
@@ -114,6 +122,9 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     lineHeight: 22,
     marginTop: spacing.xs,
+  },
+  addButton: {
+    marginBottom: spacing.lg,
   },
   listContent: {
     paddingBottom: spacing.xxl,

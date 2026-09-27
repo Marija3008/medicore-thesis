@@ -20,26 +20,27 @@ export class ApiError extends Error {
 
 export async function apiFetch<T>(
   endpoint: string,
-  options: ApiRequestOptions = {}
+  options: ApiRequestOptions = {},
 ): Promise<T> {
-  const {
-    requiresAuth = true,
-    headers,
-    ...requestOptions
-  } = options;
+  const { requiresAuth = true, headers, ...requestOptions } = options;
 
   const requestHeaders = new Headers(headers);
 
   requestHeaders.set("Accept", "application/json");
 
+  if (
+    requestOptions.body &&
+    typeof requestOptions.body === "string" &&
+    !requestHeaders.has("Content-Type")
+  ) {
+    requestHeaders.set("Content-Type", "application/json");
+  }
+
   if (requiresAuth) {
     const accessToken = await getAccessToken();
 
     if (accessToken) {
-      requestHeaders.set(
-        "Authorization",
-        `Bearer ${accessToken}`
-      );
+      requestHeaders.set("Authorization", `Bearer ${accessToken}`);
     }
   }
 
@@ -52,9 +53,9 @@ export async function apiFetch<T>(
     });
   } catch {
     throw new ApiError(
-      "Could not connect to the MediCore API. Check that the backend is running and the phone is on the same network.",
+      "Could not connect to the MediCore API. Check that the backend and API tunnel are running.",
       0,
-      null
+      null,
     );
   }
 
@@ -84,7 +85,6 @@ export async function apiFetch<T>(
 
   return responseData as T;
 }
-
 
 /*
 apiFetch(...)

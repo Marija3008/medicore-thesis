@@ -2,14 +2,16 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { medicationsService } from "@/features/medications/services/medicationsService";
 
-export function useMarkDoseTaken(medicationId?: string) {
+export function useCreateMedication() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: medicationsService.markDoseTaken,
+    mutationFn: medicationsService.createMedication,
+
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["medications"] });
-      queryClient.invalidateQueries({ queryKey: ["medication", medicationId] });
+      queryClient.invalidateQueries({
+        queryKey: ["medications"],
+      });
     },
   });
 }

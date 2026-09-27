@@ -299,6 +299,30 @@ namespace MediCore.Api.Controllers
             return Ok(ToResponse(medication));
         }
 
+        [HttpPatch("{id:int}/reactivate")]
+        public async Task<ActionResult<MedicationResponse>> ReactivateMedication(
+    int id)
+        {
+            var patientUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrWhiteSpace(patientUserId))
+            {
+                return Unauthorized();
+            }
+
+            var medication =
+                await _medicationService.ReactivateMedicationAsync(
+                    id,
+                    patientUserId);
+
+            if (medication == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ToResponse(medication));
+        }
+
         private static MedicationResponse ToResponse(Medication medication)
         {
             return new MedicationResponse

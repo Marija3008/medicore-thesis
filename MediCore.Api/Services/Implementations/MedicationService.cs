@@ -117,5 +117,27 @@ namespace MediCore.Api.Services.Implementations
 
             return medication;
         }
+
+        public async Task<Medication?> ReactivateMedicationAsync(
+    int medicationId,
+    string patientUserId)
+        {
+            var medication = await _db.Medications
+                .Include(m => m.Schedules)
+                .FirstOrDefaultAsync(m =>
+                    m.Id == medicationId &&
+                    m.PatientUserId == patientUserId);
+
+            if (medication == null)
+            {
+                return null;
+            }
+
+            medication.IsActive = true;
+
+            await _db.SaveChangesAsync();
+
+            return medication;
+        }
     }
 }
