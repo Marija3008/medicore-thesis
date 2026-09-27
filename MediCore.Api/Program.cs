@@ -128,6 +128,8 @@ builder.Services.AddScoped<JwtTokenService>();
 
 builder.Services.AddScoped<IPatientAccessService, PatientAccessService>();
 
+builder.Services.AddScoped<IMedicationService, MedicationService>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())

@@ -16,6 +16,8 @@ namespace MediCore.Api.Data
 
         public DbSet<MedicalDocument> MedicalDocuments { get; set; } = null!; //this  table manages docs
         //DbSet<T> is how EF Core knows that a class should be stored as a database table and queried from the database
+        public DbSet<Medication> Medications => Set<Medication>();
+        public DbSet<MedicationSchedule> MedicationSchedules => Set<MedicationSchedule>();
         public DbSet<Chat> Chats { get; set; } = null!; //null! means: do not warn me that this prop starts as null; EF Core will init it later
         //this table manages chats, one row means one conversation
         public DbSet<ChatMessage> ChatMessages { get; set; } = null!;
@@ -43,6 +45,39 @@ namespace MediCore.Api.Data
 
             builder.Entity<MedicalDocument>()
                 .HasIndex(document => document.OwnerUserId);
+
+            // MEDICATION
+
+            // One patient can own many medication records.
+            builder.Entity<Medication>()
+                .HasOne(medication => medication.Patient)
+                .WithMany()
+                .HasForeignKey(medication => medication.PatientUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Medication>()
+                .Property(medication => medication.PatientUserId)
+                .IsRequired();
+
+            builder.Entity<Medication>()
+                .HasIndex(medication => medication.PatientUserId);
+
+            // MEDICATION SCHEDULE
+
+            // One medication can have multiple reminder/schedule times.
+            builder.Entity<MedicationSchedule>()
+                .HasOne(schedule => schedule.Medication)
+                .WithMany(medication => medication.Schedules)
+                .HasForeignKey(schedule => schedule.MedicationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<MedicationSchedule>()
+                .HasIndex(schedule => new
+                {
+                    schedule.MedicationId,
+                    schedule.TimeOfDay
+                })
+                .IsUnique();
 
             builder.Entity<Chat>()
                 .HasOne(chat => chat.OwnerUser)
